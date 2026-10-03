@@ -1,3 +1,4 @@
+import { AppLoader } from "./components/ui/AppLoader";
 import { useEffect, useState, lazy, Suspense } from "react";
 import { AnimatePresence, motion, MotionConfig } from "framer-motion";
 import { Check, X } from "lucide-react";
@@ -49,8 +50,12 @@ function Application() {
         className="login-page"
         style={{ display: "grid", placeItems: "center" }}
       >
-        <div role="status">
-          {bootstrapError || "Loading workspace…"}
+        <div>
+          {bootstrapError ? (
+            <p role="alert">{bootstrapError}</p>
+          ) : (
+            <AppLoader />
+          )}
           {bootstrapError && (
             <button
               className="secondary-action"
@@ -78,7 +83,13 @@ function Application() {
             <div className="app-shell">
               <AppHeader onMenu={() => setOpen(true)} />
               {path.startsWith("/settings") ? (
-                <Suspense fallback={<div role="status">Loading settings…</div>}>
+                <Suspense
+                  fallback={
+                    <div className="deferred-loading">
+                      <AppLoader />
+                    </div>
+                  }
+                >
                   <SettingsPage />
                 </Suspense>
               ) : (

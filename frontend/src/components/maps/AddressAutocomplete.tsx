@@ -1,5 +1,6 @@
+import { AppLoader } from "../ui/AppLoader";
 import { useEffect, useId, useRef, useState, type ComponentType } from "react";
-import { Check, LoaderCircle, MapPin, Search } from "lucide-react";
+import { Check, MapPin, Search } from "lucide-react";
 import {
   searchLocations,
   type LocationSuggestion,
@@ -191,7 +192,7 @@ export function AddressAutocomplete({
           onClick={search}
         >
           {loading ? (
-            <LoaderCircle size={15} className="spin" />
+            <AppLoader compact iconOnly />
           ) : selected ? (
             <Check size={15} />
           ) : (
@@ -243,7 +244,7 @@ export function AddressAutocomplete({
             })}
           </ul>
           {loading ? (
-            <p role="status">Searching locations...</p>
+            <AppLoader compact label="Searching locations…" />
           ) : error ? (
             <p role="alert">
               {error}

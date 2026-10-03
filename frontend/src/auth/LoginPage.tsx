@@ -1,12 +1,7 @@
+import { AppLoader } from "../components/ui/AppLoader";
 import { useState, type FormEvent } from "react";
 import { motion } from "framer-motion";
-import {
-  Check,
-  Copy,
-  ShieldCheck,
-  ArrowRight,
-  LoaderCircle,
-} from "lucide-react";
+import { Check, Copy, ShieldCheck, ArrowRight } from "lucide-react";
 import { useWorkspace } from "../context/WorkspaceContext";
 import { Brand } from "../components/ui/Brand";
 import { PasswordField } from "../components/ui/PasswordField";
@@ -166,7 +161,7 @@ export function LoginPage() {
             <button className="primary-action" disabled={state !== "idle"}>
               {state === "loading" ? (
                 <>
-                  <LoaderCircle size={17} className="spin" />
+                  <AppLoader compact iconOnly />
                   Signing in...
                 </>
               ) : state === "success" ? (

@@ -1,17 +1,11 @@
+import { AppLoader } from "../components/ui/AppLoader";
 import { HelpTooltip } from "../components/ui/HelpTooltip";
 import { planTrip } from "../services/trips";
 import type { TripPlanResponse } from "../types/api";
 import { useWorkspace } from "../context/WorkspaceContext";
 import { useState, useEffect, useRef, lazy, Suspense } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import {
-  ShieldCheck,
-  ArrowDown,
-  Route,
-  Check,
-  LoaderCircle,
-  Sparkles,
-} from "lucide-react";
+import { ShieldCheck, ArrowDown, Route, Check, Sparkles } from "lucide-react";
 import { TripPlannerForm } from "../components/trip/TripPlannerForm";
 import { TripSummary } from "../components/trip/TripSummary";
 const RouteMap = lazy(() =>
@@ -25,26 +19,17 @@ import type { TripInput } from "../types/trip";
 export function TripPlannerPage() {
   const { branding } = useWorkspace();
   const [loading, setLoading] = useState(false);
-  const [stage, setStage] = useState(0);
   const [result, setResult] = useState<TripPlanResponse | null>(null);
   const [generation, setGeneration] = useState(0);
   const [error, setError] = useState("");
   const request = useRef<AbortController | null>(null);
   useEffect(() => () => request.current?.abort(), []);
-  useEffect(() => {
-    if (!loading) return;
-    const timer = setInterval(
-      () => setStage((value) => Math.min(2, value + 1)),
-      800,
-    );
-    return () => clearInterval(timer);
-  }, [loading]);
   async function plan(input: TripInput) {
+    if (loading) return;
     request.current?.abort();
     const controller = new AbortController();
     request.current = controller;
     setLoading(true);
-    setStage(0);
     setError("");
     setResult(null);
     try {
@@ -74,24 +59,64 @@ export function TripPlannerPage() {
             label="How this planner works"
             controlLabel="How this planner works"
           >
-            <strong>How this planner works</strong>
+            <p className="planner-guide-subtitle">
+              From route planning to HOS-compliant daily logs.
+            </p>
             <ol>
-              <li>Select the current, pickup, and drop-off locations.</li>
-              <li>Enter the driver’s current 70-hour cycle usage.</li>
-              <li>The backend calculates the real road route.</li>
               <li>
-                HOS logic inserts required pickup, drop-off, fuel, break, and
-                rest events.
+                <span className="guide-step-number">01</span>
+                <div>
+                  <strong>Select route locations</strong>
+                  <span>
+                    Select the current, pickup, and drop-off locations.
+                  </span>
+                </div>
               </li>
               <li>
-                The same timeline drives the map, compliance summary, and daily
-                logs.
+                <span className="guide-step-number">02</span>
+                <div>
+                  <strong>Add current cycle usage</strong>
+                  <span>Enter the driver’s current 70-hour cycle usage.</span>
+                </div>
+              </li>
+              <li>
+                <span className="guide-step-number">03</span>
+                <div>
+                  <strong>Calculate the road route</strong>
+                  <span>The backend calculates the real road route.</span>
+                </div>
+              </li>
+              <li>
+                <span className="guide-step-number">04</span>
+                <div>
+                  <strong>Apply HOS rules</strong>
+                  <span>
+                    HOS logic inserts required pickup, drop-off, fuel, break,
+                    and rest events.
+                  </span>
+                </div>
+              </li>
+              <li>
+                <span className="guide-step-number">05</span>
+                <div>
+                  <strong>Generate trip outputs</strong>
+                  <span>
+                    The same timeline drives the map, compliance summary, and
+                    daily logs.
+                  </span>
+                </div>
               </li>
             </ol>
-            <p>
-              This application is a trip-planning demo and does not replace a
-              certified ELD.
-            </p>
+            <div className="planner-guide-notice">
+              <ShieldCheck size={17} aria-hidden="true" />
+              <div>
+                <strong>Planning demo only</strong>
+                <p>
+                  This application is a trip-planning demo and does not replace
+                  a certified ELD.
+                </p>
+              </div>
+            </div>
           </HelpTooltip>
         </div>
         <span className="rules-pill">
@@ -111,14 +136,7 @@ export function TripPlannerPage() {
       )}
       <div className="result-announcement" role="status" aria-live="polite">
         {loading ? (
-          <>
-            <LoaderCircle size={16} className="spin" />
-            {
-              ["Planning route…", "Calculating distance…", "Preparing trip…"][
-                stage
-              ]
-            }
-          </>
+          <>Planning your compliant route…</>
         ) : result ? (
           <>
             <Check size={15} />
@@ -172,8 +190,8 @@ export function TripPlannerPage() {
             <div className="route-layout">
               <Suspense
                 fallback={
-                  <div className="card" role="status">
-                    Loading route map…
+                  <div className="card deferred-loading">
+                    <AppLoader label="Loading route map…" />
                   </div>
                 }
               >
@@ -237,20 +255,16 @@ export function TripPlannerPage() {
           </motion.div>
         ) : (
           <motion.div
-            className="loading-skeleton"
+            className="card trip-loading-card"
+            aria-busy="true"
             key="loading"
-            initial={{ opacity: 0 }}
+            initial={false}
             animate={{ opacity: 1 }}
           >
-            <div className="skeleton-metrics">
-              {[0, 1, 2, 3, 4].map((i) => (
-                <div key={i} />
-              ))}
-            </div>
-            <div className="skeleton-map">
-              <Route size={36} />
-              <p>Putting the pieces of your journey together</p>
-            </div>
+            <AppLoader
+              label="Planning your compliant route…"
+              detail="Calculating route, HOS limits, stops, and daily logs."
+            />
           </motion.div>
         )}
       </AnimatePresence>

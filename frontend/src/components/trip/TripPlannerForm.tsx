@@ -1,3 +1,4 @@
+import { AppLoader } from "../ui/AppLoader";
 import { HelpTooltip } from "../ui/HelpTooltip";
 import { helpCopy } from "../ui/helpCopy";
 import { AddressAutocomplete } from "../maps/AddressAutocomplete";
@@ -8,7 +9,6 @@ import {
   Circle,
   Package,
   ArrowRight,
-  LoaderCircle,
   Clock3,
   Info,
 } from "lucide-react";
@@ -156,7 +156,7 @@ export function TripPlannerForm({
             <button className="primary-button" disabled={loading} type="submit">
               {loading ? (
                 <>
-                  <LoaderCircle className="spin" size={17} />
+                  <AppLoader compact iconOnly />
                   Planning route…
                 </>
               ) : (

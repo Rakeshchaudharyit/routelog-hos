@@ -1,3 +1,4 @@
+import { AppLoader } from "../ui/AppLoader";
 import { HelpTooltip } from "../ui/HelpTooltip";
 import { helpCopy } from "../ui/helpCopy";
 import { dateLabel } from "../../types/schedule";
@@ -132,7 +133,7 @@ export function DailyLogs({ logs }: { logs: DailyLog[] }) {
       </div>
       <AnimatePresence>
         {full && (
-          <Suspense fallback={<span role="status">Loading full log…</span>}>
+          <Suspense fallback={<AppLoader compact label="Loading full log…" />}>
             <FullLogModal log={log} onClose={() => setFull(false)} />
           </Suspense>
         )}

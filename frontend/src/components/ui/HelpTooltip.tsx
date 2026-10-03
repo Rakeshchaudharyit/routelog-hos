@@ -6,17 +6,22 @@ import {
   useState,
   type ReactNode,
 } from "react";
-import { Info } from "lucide-react";
+import { Info, Route } from "lucide-react";
 
 export function HelpTooltip({
   label,
+  title,
+  description,
   children,
   controlLabel,
 }: {
-  label: string;
-  children: ReactNode;
+  label?: string;
+  title?: string;
+  description?: string;
+  children?: ReactNode;
   controlLabel?: string;
 }) {
+  const heading = title || label || "Help";
   const id = useId();
   const trigger = useRef<HTMLButtonElement>(null);
   const panel = useRef<HTMLDivElement>(null);
@@ -48,7 +53,7 @@ export function HelpTooltip({
         close();
         return;
       }
-      const bounds = element.getBoundingClientRect();
+      const bounds = { width: element.offsetWidth, height: element.offsetHeight };
       const width = document.documentElement.clientWidth;
       const height = window.innerHeight;
       const left = Math.max(
@@ -122,17 +127,19 @@ export function HelpTooltip({
         ref={trigger}
         type="button"
         className={`help-trigger${controlLabel ? " help-trigger-labeled" : ""}`}
-        aria-label={controlLabel || `Help: ${label}`}
+        aria-label={controlLabel || `Help: ${heading}`}
         aria-expanded={open}
         aria-controls={id}
         aria-describedby={open ? id : undefined}
         onFocus={() => {
+          cancelLeave();
           if (!controlLabel) setOpen(true);
         }}
         onBlur={(event) => {
           if (!panel.current?.contains(event.relatedTarget as Node)) close();
         }}
         onClick={() => {
+          cancelLeave();
           if (pinned.current) close();
           else {
             pinned.current = true;
@@ -149,12 +156,24 @@ export function HelpTooltip({
           id={id}
           popover="manual"
           role={controlLabel ? "region" : "tooltip"}
-          aria-label={controlLabel ? label : undefined}
+          aria-label={controlLabel ? heading : undefined}
           className={`help-panel${controlLabel ? " help-panel-guide" : ""}`}
           onMouseEnter={cancelLeave}
           onMouseLeave={leave}
         >
-          {children}
+          <div className="help-panel-heading">
+            {controlLabel ? (
+              <Route size={18} aria-hidden="true" />
+            ) : (
+              <Info size={16} aria-hidden="true" />
+            )}
+            <strong>{heading}</strong>
+          </div>
+          {description ? (
+            <p className="help-description">{description}</p>
+          ) : (
+            <div className="help-description">{children}</div>
+          )}
         </div>
       )}
     </span>
