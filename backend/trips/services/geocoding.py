@@ -1,16 +1,34 @@
 """Small Nominatim proxy for explicit user searches, not public-service autocomplete."""
 import hashlib
 import json
+import logging
 import math
+import re
 import threading
 import time
 from typing import TypedDict
 from urllib.error import HTTPError, URLError
-from urllib.parse import urlencode
+from urllib.parse import quote, quote_plus, urlencode, urlsplit
 from urllib.request import Request, urlopen
 
 from django.conf import settings
 from django.core.cache import cache
+
+
+logger = logging.getLogger(__name__)
+
+
+def _diagnostic_text(value, query):
+    """Keep upstream diagnostics bounded and omit sensitive echoed content."""
+    text = str(value)
+    if re.search(r'cookie|authorization|password|credential|secret|token|session', text, re.IGNORECASE):
+        return '[omitted: potentially sensitive upstream content]'
+    for variant in (query, quote(query, safe=''), quote_plus(query)):
+        text = re.sub(re.escape(variant), '[search redacted]', text, flags=re.IGNORECASE)
+    # Upstream error pages can echo request URLs, including queries or userinfo.
+    text = re.sub(r'https?://[^\s<>"\']+', '[URL redacted]', text, flags=re.IGNORECASE)
+    text = re.sub(r'[\x00-\x1f\x7f]', ' ', text)
+    return text[:500]
 
 
 class Location(TypedDict):
@@ -85,7 +103,39 @@ def search_locations(query):
                         break
                 except (KeyError, TypeError, ValueError, AttributeError):
                     continue
-        except (HTTPError, URLError, TimeoutError, OSError, ValueError) as error:
+        except HTTPError as error:
+            body = '[unavailable]'
+            try:
+                # Bound the read as well as the logged text; never inspect headers.
+                body = _diagnostic_text(error.read(2048).decode('utf-8', errors='replace'), query)
+            except Exception:
+                # Diagnostic reads must not replace the original upstream failure.
+                pass
+            logger.warning(
+                'Nominatim HTTP failure: host=%s status=%s reason=%s body=%s',
+                urlsplit(settings.NOMINATIM_URL).hostname, error.code,
+                _diagnostic_text(error.reason, query), body,
+            )
+            raise GeocodingError('Address search is temporarily unavailable. Please try again.') from error
+        except URLError as error:
+            logger.warning(
+                'Nominatim URL failure: host=%s reason=%s',
+                urlsplit(settings.NOMINATIM_URL).hostname, _diagnostic_text(error.reason, query),
+            )
+            raise GeocodingError('Address search is temporarily unavailable. Please try again.') from error
+        except TimeoutError as error:
+            logger.warning(
+                'Nominatim timeout: host=%s reason=%s',
+                urlsplit(settings.NOMINATIM_URL).hostname, _diagnostic_text(error, query),
+            )
+            raise GeocodingError('Address search is temporarily unavailable. Please try again.') from error
+        except OSError as error:
+            logger.warning(
+                'Nominatim OS failure: host=%s reason=%s',
+                urlsplit(settings.NOMINATIM_URL).hostname, _diagnostic_text(error, query),
+            )
+            raise GeocodingError('Address search is temporarily unavailable. Please try again.') from error
+        except ValueError as error:
             raise GeocodingError('Address search is temporarily unavailable. Please try again.') from error
         cache.set(key, results, timeout=300)
         return results
