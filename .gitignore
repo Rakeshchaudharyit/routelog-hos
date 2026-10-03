@@ -1,0 +1,25 @@
+node_modules/
+dist/
+*.tsbuildinfo
+.DS_Store
+work/
+.env
+.env.*
+!.env.example
+.venv/
+__pycache__/
+*.py[cod]
+*.sqlite3
+.coverage
+media/
+staticfiles/
+outputs/
+*.log
+.pytest_cache/
+htmlcov/
+coverage/
+.vercel/
+.deploy/
+
+# Empty npm artifact from the Python backend; exclude from the first commit.
+backend/package-lock.json

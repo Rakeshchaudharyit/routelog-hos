@@ -1,0 +1,464 @@
+{
+  "trip_id": "RL-TEST",
+  "status": "ok",
+  "hos_status": "calculated",
+  "route": {
+    "distance_miles": 912,
+    "duration_hours": 15.75,
+    "geometry": {
+      "type": "LineString",
+      "coordinates": [
+        [
+          -84.3898151,
+          33.7544657
+        ],
+        [
+          -86.7742984,
+          36.1622767
+        ],
+        [
+          -96.7968559,
+          32.7762719
+        ]
+      ]
+    },
+    "legs": [
+      {
+        "from": {
+          "address": "Atlanta, Fulton County, Georgia, United States",
+          "lat": 33.7544657,
+          "lng": -84.3898151
+        },
+        "to": {
+          "address": "Nashville, Davidson County, Middle Tennessee, Tennessee, United States",
+          "lat": 36.1622767,
+          "lng": -86.7742984
+        },
+        "distance_miles": 250,
+        "duration_hours": 4
+      },
+      {
+        "from": {
+          "address": "Nashville, Davidson County, Middle Tennessee, Tennessee, United States",
+          "lat": 36.1622767,
+          "lng": -86.7742984
+        },
+        "to": {
+          "address": "Dallas, Dallas County, Texas, United States",
+          "lat": 32.7762719,
+          "lng": -96.7968559
+        },
+        "distance_miles": 662,
+        "duration_hours": 11.75
+      }
+    ]
+  },
+  "summary": {
+    "distance_miles": 912,
+    "driving_hours": 15.75,
+    "trip_duration_hours": 27.75,
+    "driving_days": 2,
+    "cycle_used_at_start": 18.0,
+    "cycle_used_at_end": 35.75,
+    "cycle_remaining": 34.25,
+    "fuel_stops": 0,
+    "required_breaks": 0,
+    "required_30m_breaks": 0,
+    "daily_rests": 1,
+    "cycle_restarts": 0,
+    "start_time": "2026-10-05T06:00:00",
+    "end_time": "2026-10-06T09:45:00"
+  },
+  "events": [
+    {
+      "type": "trip_start",
+      "status": "off_duty",
+      "start": "2026-10-05T06:00:00",
+      "end": "2026-10-05T06:00:00",
+      "duration_seconds": 0,
+      "duration_hours": 0.0,
+      "location": {
+        "address": "Atlanta, Fulton County, Georgia, United States",
+        "lat": 33.7544657,
+        "lng": -84.3898151
+      },
+      "description": "Trip started",
+      "distance_miles": 0,
+      "cycle_used_at_end": 18.0,
+      "route_mile": 0.0,
+      "route_mile_at_end": 0.0
+    },
+    {
+      "type": "driving",
+      "status": "driving",
+      "start": "2026-10-05T06:00:00",
+      "end": "2026-10-05T10:00:00",
+      "duration_seconds": 14400,
+      "duration_hours": 4.0,
+      "location": {
+        "address": "En route \u00b7 Mile 0.0",
+        "lat": 33.7544657,
+        "lng": -84.3898151
+      },
+      "description": "Driving toward Nashville, Davidson County, Middle Tennessee, Tennessee, United States",
+      "distance_miles": 250.0,
+      "cycle_used_at_end": 22.0,
+      "route_mile": 0.0,
+      "route_mile_at_end": 250.0
+    },
+    {
+      "type": "pickup",
+      "status": "on_duty",
+      "start": "2026-10-05T10:00:00",
+      "end": "2026-10-05T11:00:00",
+      "duration_seconds": 3600,
+      "duration_hours": 1.0,
+      "location": {
+        "address": "Nashville, Davidson County, Middle Tennessee, Tennessee, United States",
+        "lat": 36.1622767,
+        "lng": -86.7742984
+      },
+      "description": "Pickup",
+      "distance_miles": 0,
+      "cycle_used_at_end": 23.0,
+      "route_mile": 250.0,
+      "route_mile_at_end": 250.0
+    },
+    {
+      "type": "driving",
+      "status": "driving",
+      "start": "2026-10-05T11:00:00",
+      "end": "2026-10-05T18:00:00",
+      "duration_seconds": 25200,
+      "duration_hours": 7.0,
+      "location": {
+        "address": "En route \u00b7 Mile 250.0",
+        "lat": 36.088120508982676,
+        "lng": -86.99380035949284
+      },
+      "description": "Driving toward Dallas, Dallas County, Texas, United States",
+      "distance_miles": 394.3829787234043,
+      "cycle_used_at_end": 30.0,
+      "route_mile": 250.0,
+      "route_mile_at_end": 644.3829787234042
+    },
+    {
+      "type": "daily_rest",
+      "status": "off_duty",
+      "start": "2026-10-05T18:00:00",
+      "end": "2026-10-06T04:00:00",
+      "duration_seconds": 36000,
+      "duration_hours": 10.0,
+      "location": {
+        "address": "En route \u00b7 Mile 644.4",
+        "lat": 34.11510431639725,
+        "lng": -92.83391855383753
+      },
+      "description": "10-hour qualifying rest",
+      "distance_miles": 0,
+      "cycle_used_at_end": 30.0,
+      "route_mile": 644.3829787234042,
+      "route_mile_at_end": 644.3829787234042
+    },
+    {
+      "type": "driving",
+      "status": "driving",
+      "start": "2026-10-06T04:00:00",
+      "end": "2026-10-06T08:45:00",
+      "duration_seconds": 17100,
+      "duration_hours": 4.75,
+      "location": {
+        "address": "En route \u00b7 Mile 644.4",
+        "lat": 34.11510431639725,
+        "lng": -92.83391855383753
+      },
+      "description": "Driving toward Dallas, Dallas County, Texas, United States",
+      "distance_miles": 267.6170212765957,
+      "cycle_used_at_end": 34.75,
+      "route_mile": 644.3829787234042,
+      "route_mile_at_end": 912.0
+    },
+    {
+      "type": "dropoff",
+      "status": "on_duty",
+      "start": "2026-10-06T08:45:00",
+      "end": "2026-10-06T09:45:00",
+      "duration_seconds": 3600,
+      "duration_hours": 1.0,
+      "location": {
+        "address": "Dallas, Dallas County, Texas, United States",
+        "lat": 32.7762719,
+        "lng": -96.7968559
+      },
+      "description": "Dropoff",
+      "distance_miles": 0,
+      "cycle_used_at_end": 35.75,
+      "route_mile": 912.0,
+      "route_mile_at_end": 912.0
+    },
+    {
+      "type": "trip_complete",
+      "status": "off_duty",
+      "start": "2026-10-06T09:45:00",
+      "end": "2026-10-06T09:45:00",
+      "duration_seconds": 0,
+      "duration_hours": 0.0,
+      "location": {
+        "address": "Dallas, Dallas County, Texas, United States",
+        "lat": 32.7762719,
+        "lng": -96.7968559
+      },
+      "description": "Trip complete",
+      "distance_miles": 0,
+      "cycle_used_at_end": 35.75,
+      "route_mile": 912.0,
+      "route_mile_at_end": 912.0
+    }
+  ],
+  "compliance": {
+    "compliant": true,
+    "checks": [
+      {
+        "rule": "11_hour_driving_limit",
+        "status": "compliant",
+        "max_hours": 11.0,
+        "limit_hours": 11.0
+      },
+      {
+        "rule": "14_hour_driving_window",
+        "status": "compliant",
+        "max_hours": 12.0,
+        "limit_hours": 14.0
+      },
+      {
+        "rule": "30_minute_break",
+        "status": "compliant",
+        "max_hours": 7.0,
+        "limit_hours": 8.0
+      },
+      {
+        "rule": "70_hour_cycle",
+        "status": "compliant",
+        "max_hours": 35.75,
+        "limit_hours": 70.0
+      }
+    ],
+    "warnings": [],
+    "fuel": {
+      "compliant": true,
+      "max_interval_miles": 912.0,
+      "limit_miles": 1000
+    }
+  },
+  "daily_logs": [
+    {
+      "day": 1,
+      "date": "2026-10-05",
+      "distance_miles": 644.3829787234042,
+      "cycle_used": 30.0,
+      "segments": [
+        {
+          "start_seconds": 0,
+          "end_seconds": 21600,
+          "status": "off_duty"
+        },
+        {
+          "start_seconds": 21600,
+          "end_seconds": 36000,
+          "status": "driving"
+        },
+        {
+          "start_seconds": 36000,
+          "end_seconds": 39600,
+          "status": "on_duty"
+        },
+        {
+          "start_seconds": 39600,
+          "end_seconds": 64800,
+          "status": "driving"
+        },
+        {
+          "start_seconds": 64800,
+          "end_seconds": 86400,
+          "status": "off_duty"
+        }
+      ],
+      "totals_seconds": {
+        "off_duty": 43200,
+        "sleeper": 0,
+        "driving": 39600,
+        "on_duty": 3600
+      },
+      "total_seconds": 86400,
+      "remarks": [
+        "Atlanta, Fulton County, Georgia, United States \u2014 Trip started",
+        "En route \u00b7 Mile 0.0 \u2014 Driving toward Nashville, Davidson County, Middle Tennessee, Tennessee, United States",
+        "Nashville, Davidson County, Middle Tennessee, Tennessee, United States \u2014 Pickup",
+        "En route \u00b7 Mile 250.0 \u2014 Driving toward Dallas, Dallas County, Texas, United States",
+        "En route \u00b7 Mile 644.4 \u2014 10-hour qualifying rest"
+      ],
+      "driver": {
+        "name": "Alex Morgan",
+        "co_driver_name": null
+      },
+      "carrier": {
+        "name": "RouteLog Demo Transport",
+        "main_office_address": "Atlanta, GA"
+      },
+      "vehicle_number": "TRK-102",
+      "shipping_document_number": "RL-2026-1042",
+      "total_miles": 644.3829787234042,
+      "totals": {
+        "off_duty": 12.0,
+        "sleeper": 0.0,
+        "driving": 11.0,
+        "on_duty": 1.0
+      },
+      "certification": {
+        "driver_name": "Alex Morgan",
+        "certified": false,
+        "status": "planning_record"
+      },
+      "remark_details": [
+        {
+          "time": "2026-10-05T06:00:00",
+          "location": "Atlanta, Fulton County, Georgia, United States",
+          "description": "Trip started",
+          "type": "trip_start",
+          "status": "off_duty"
+        },
+        {
+          "time": "2026-10-05T06:00:00",
+          "location": "En route \u00b7 Mile 0.0",
+          "description": "Driving toward Nashville, Davidson County, Middle Tennessee, Tennessee, United States",
+          "type": "driving",
+          "status": "driving"
+        },
+        {
+          "time": "2026-10-05T10:00:00",
+          "location": "Nashville, Davidson County, Middle Tennessee, Tennessee, United States",
+          "description": "Pickup",
+          "type": "pickup",
+          "status": "on_duty"
+        },
+        {
+          "time": "2026-10-05T11:00:00",
+          "location": "En route \u00b7 Mile 250.0",
+          "description": "Driving toward Dallas, Dallas County, Texas, United States",
+          "type": "driving",
+          "status": "driving"
+        },
+        {
+          "time": "2026-10-05T18:00:00",
+          "location": "En route \u00b7 Mile 644.4",
+          "description": "10-hour qualifying rest",
+          "type": "daily_rest",
+          "status": "off_duty"
+        }
+      ]
+    },
+    {
+      "day": 2,
+      "date": "2026-10-06",
+      "distance_miles": 267.6170212765957,
+      "cycle_used": 35.75,
+      "segments": [
+        {
+          "start_seconds": 0,
+          "end_seconds": 14400,
+          "status": "off_duty"
+        },
+        {
+          "start_seconds": 14400,
+          "end_seconds": 31500,
+          "status": "driving"
+        },
+        {
+          "start_seconds": 31500,
+          "end_seconds": 35100,
+          "status": "on_duty"
+        },
+        {
+          "start_seconds": 35100,
+          "end_seconds": 86400,
+          "status": "off_duty"
+        }
+      ],
+      "totals_seconds": {
+        "off_duty": 65700,
+        "sleeper": 0,
+        "driving": 17100,
+        "on_duty": 3600
+      },
+      "total_seconds": 86400,
+      "remarks": [
+        "En route \u00b7 Mile 644.4 \u2014 Driving toward Dallas, Dallas County, Texas, United States",
+        "Dallas, Dallas County, Texas, United States \u2014 Dropoff",
+        "Dallas, Dallas County, Texas, United States \u2014 Trip complete"
+      ],
+      "driver": {
+        "name": "Alex Morgan",
+        "co_driver_name": null
+      },
+      "carrier": {
+        "name": "RouteLog Demo Transport",
+        "main_office_address": "Atlanta, GA"
+      },
+      "vehicle_number": "TRK-102",
+      "shipping_document_number": "RL-2026-1042",
+      "total_miles": 267.6170212765957,
+      "totals": {
+        "off_duty": 18.25,
+        "sleeper": 0.0,
+        "driving": 4.75,
+        "on_duty": 1.0
+      },
+      "certification": {
+        "driver_name": "Alex Morgan",
+        "certified": false,
+        "status": "planning_record"
+      },
+      "remark_details": [
+        {
+          "time": "2026-10-06T04:00:00",
+          "location": "En route \u00b7 Mile 644.4",
+          "description": "Driving toward Dallas, Dallas County, Texas, United States",
+          "type": "driving",
+          "status": "driving"
+        },
+        {
+          "time": "2026-10-06T08:45:00",
+          "location": "Dallas, Dallas County, Texas, United States",
+          "description": "Dropoff",
+          "type": "dropoff",
+          "status": "on_duty"
+        },
+        {
+          "time": "2026-10-06T09:45:00",
+          "location": "Dallas, Dallas County, Texas, United States",
+          "description": "Trip complete",
+          "type": "trip_complete",
+          "status": "off_duty"
+        }
+      ]
+    }
+  ],
+  "requested_locations": {
+    "current_location": {
+      "address": "Atlanta, Fulton County, Georgia, United States",
+      "lat": 33.7544657,
+      "lng": -84.3898151
+    },
+    "pickup_location": {
+      "address": "Nashville, Davidson County, Middle Tennessee, Tennessee, United States",
+      "lat": 36.1622767,
+      "lng": -86.7742984
+    },
+    "dropoff_location": {
+      "address": "Dallas, Dallas County, Texas, United States",
+      "lat": 32.7762719,
+      "lng": -96.7968559
+    }
+  },
+  "current_cycle_used": 18
+}

@@ -1,0 +1,35 @@
+# Import as a Render Blueprint after choosing a repository. Review plan costs before creation.
+services:
+  - type: web
+    name: routelog-api
+    runtime: python
+    # Pre-deploy commands require a paid service. Review this plan before deploying.
+    plan: starter
+    rootDir: backend
+    buildCommand: bash build.sh
+    preDeployCommand: bash release.sh
+    startCommand: bash start.sh
+    healthCheckPath: /api/health/
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.12.13
+      - key: DJANGO_DEBUG
+        value: "false"
+      - key: DJANGO_SECRET_KEY
+        generateValue: true
+      - key: DJANGO_ALLOWED_HOSTS
+        sync: false
+      - key: FRONTEND_URL
+        sync: false
+      - key: CORS_ALLOWED_ORIGINS
+        sync: false
+      - key: CSRF_TRUSTED_ORIGINS
+        sync: false
+      - key: DATABASE_URL
+        sync: false
+      - key: DJANGO_SERVE_DEMO_MEDIA
+        value: "true"
+      - key: DEMO_ADMIN_EMAIL
+        sync: false
+      - key: DEMO_ADMIN_PASSWORD
+        sync: false
