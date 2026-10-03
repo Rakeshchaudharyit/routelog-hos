@@ -1,3 +1,5 @@
+import { HelpTooltip } from "../ui/HelpTooltip";
+import { helpCopy } from "../ui/helpCopy";
 import { useEffect, useState } from "react";
 import {
   MapContainer,
@@ -93,7 +95,10 @@ export function RouteMap({
     <section className="card route-card live-route-card">
       <div className="section-heading">
         <div>
-          <h2>Route overview</h2>
+          <div className="help-label">
+            <h2>Route overview</h2>
+            <HelpTooltip label="Map events">{helpCopy.map}</HelpTooltip>
+          </div>
           <p>
             {locations
               .map((location) => shortAddress(location.address))

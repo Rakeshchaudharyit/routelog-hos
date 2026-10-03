@@ -1,3 +1,5 @@
+import { HelpTooltip } from "../ui/HelpTooltip";
+import { helpCopy } from "../ui/helpCopy";
 import { useWorkspace } from "../../context/WorkspaceContext";
 import { useEffect, useRef } from "react";
 import { createPortal } from "react-dom";
@@ -153,7 +155,13 @@ export function FullLogModal({
                 Driver<strong>{log.certification.driver_name}</strong>
               </span>
               <span>
-                Status<strong>Driver Certification Required</strong>
+                Status
+                <strong className="help-label">
+                  Driver Certification Required
+                  <HelpTooltip label="Driver Certification Required">
+                    {helpCopy.certification}
+                  </HelpTooltip>
+                </strong>
               </span>
             </div>
             <div className="unsigned-line">

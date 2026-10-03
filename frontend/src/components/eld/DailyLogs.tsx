@@ -1,3 +1,5 @@
+import { HelpTooltip } from "../ui/HelpTooltip";
+import { helpCopy } from "../ui/helpCopy";
 import { dateLabel } from "../../types/schedule";
 import { useState, useRef, lazy, Suspense } from "react";
 import { AnimatePresence, motion } from "framer-motion";
@@ -18,7 +20,12 @@ export function DailyLogs({ logs }: { logs: DailyLog[] }) {
         <div className="heading-inline">
           <ClipboardList size={20} />
           <div>
-            <h2>Daily ELD logs</h2>
+            <div className="help-label">
+              <h2>Daily ELD logs</h2>
+              <HelpTooltip label="Daily Logs / ELD">
+                {helpCopy.logs}
+              </HelpTooltip>
+            </div>
             <p>Your hours, clearly documented.</p>
           </div>
         </div>

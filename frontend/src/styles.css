@@ -2767,3 +2767,26 @@ h1 {
 @media(max-width:1024px){.driver-log-fields{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media(max-width:700px){.full-daily-log{width:calc(100% - 20px);max-height:94dvh}.full-log-toolbar{padding:12px 16px}.driver-log-document{padding:22px 16px}.driver-log-header h2{font-size:24px}.driver-log-header{align-items:flex-start;gap:14px}.driver-log-fields{grid-template-columns:1fr;gap:15px;padding:16px}.driver-log-graph{padding:16px 12px}.full-log-totals{grid-template-columns:repeat(2,minmax(0,1fr))}.full-log-totals span:last-child{grid-column:1/-1}.driver-log-remarks li{grid-template-columns:1fr;gap:4px;padding:12px 14px}.driver-log-certification>div:not(.unsigned-line){grid-template-columns:1fr;gap:14px}.log-bottom{flex-wrap:wrap}.full-daily-log .modal-footer{padding:14px 16px}}
 @media print{.full-log-toolbar{position:static}.driver-log-document{padding:0}.driver-log-fields{grid-template-columns:repeat(3,minmax(0,1fr));padding:12px 16px;gap:12px}.driver-log-header{flex-direction:row;align-items:center}.log-date-strip{grid-template-columns:1fr 1fr}.driver-log-graph{padding:14px;break-inside:avoid}.full-log-totals{grid-template-columns:repeat(5,minmax(0,1fr))}.full-log-totals span:last-child{grid-column:auto}.driver-log-certification>div:not(.unsigned-line){grid-template-columns:1fr 1fr}.driver-log-remarks li{grid-template-columns:74px minmax(0,1fr)}.driver-log-trip-details{break-inside:avoid}.full-log-disclaimer{color:#526b7e}}
+
+/* Contextual help stays in the top layer, including inside the daily log dialog. */
+.help-label { display: flex; align-items: center; gap: 6px; flex-wrap: wrap; }
+.context-help { display: inline-flex; vertical-align: middle; flex-shrink: 0; }
+.help-trigger { display: inline-flex; align-items: center; justify-content: center; width: 28px; height: 28px; padding: 0; border: 0; border-radius: 6px; background: transparent; color: #73869a; cursor: pointer; }
+.help-trigger:hover, .help-trigger[aria-expanded="true"] { color: #2864a5; background: #edf3f9; }
+.help-trigger:focus-visible { outline: 2px solid #347cc9; outline-offset: 2px; }
+.help-trigger-labeled { width: auto; gap: 6px; padding: 4px 6px; margin-top: 8px; font-size: 12px; font-weight: 500; color: #2864a5; }
+.help-panel { position: fixed; inset: auto; margin: 0; box-sizing: border-box; width: 300px; max-width: calc(100vw - 24px); max-height: calc(100dvh - 24px); overflow: auto; padding: 12px 14px; border: 1px solid #dce5ed; border-radius: 8px; background: #fff; color: #31465b; box-shadow: 0 4px 16px #152d451a; font-size: 12px; font-weight: 400; line-height: 1.55; text-align: left; letter-spacing: normal; text-transform: none; }
+.help-panel-guide { width: 360px; padding: 16px; }
+.help-panel-guide strong { color: #172e45; font-size: 13px; }
+.help-panel-guide ol { margin: 10px 0; padding-left: 20px; }
+.help-panel-guide li + li { margin-top: 6px; }
+.help-panel-guide p { margin: 10px 0 0; padding-top: 10px; border-top: 1px solid #e5ebf1; color: #687c90; font-size: 12px; }
+.cycle-input-field > .help-label { margin-bottom: 8px; }
+@media (pointer: coarse) { .help-trigger { min-width: 36px; min-height: 36px; } }
+@media print { .context-help { display: none; } }
+.cycle-input-field > .help-label { height: 18px; margin-bottom: 0; gap: 4px; flex-wrap: nowrap; }
+.cycle-input-field .help-trigger { width: 22px; height: 22px; }
+.compliance-rule .help-trigger svg { color: currentColor; }
+.compliance-rule > div:first-child { gap: 6px; }
+.compliance-rule > div:first-child > strong { margin-right: auto; }
+.driver-log-certification strong.help-label { display: flex; }

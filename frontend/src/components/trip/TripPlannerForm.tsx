@@ -1,3 +1,5 @@
+import { HelpTooltip } from "../ui/HelpTooltip";
+import { helpCopy } from "../ui/helpCopy";
 import { AddressAutocomplete } from "../maps/AddressAutocomplete";
 import { isValidLocation } from "../../types/location";
 import { useState } from "react";
@@ -92,11 +94,17 @@ export function TripPlannerForm({
               disabled={loading}
             />
           ))}
-          <label>
-            Current cycle used
+          <div className="cycle-input-field">
+            <div className="help-label">
+              <label htmlFor="current-cycle-used">Current cycle used</label>
+              <HelpTooltip label="Current Cycle Used">
+                {helpCopy.cycle}
+              </HelpTooltip>
+            </div>
             <div className="input-wrap">
               <Clock3 size={17} />
               <input
+                id="current-cycle-used"
                 type="number"
                 min="0"
                 max="70"
@@ -117,7 +125,7 @@ export function TripPlannerForm({
               />
               <span>hrs</span>
             </div>
-          </label>
+          </div>
         </div>
         <div className="form-footer">
           <div className="cycle-block">

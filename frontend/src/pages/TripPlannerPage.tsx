@@ -1,3 +1,4 @@
+import { HelpTooltip } from "../components/ui/HelpTooltip";
 import { planTrip } from "../services/trips";
 import type { TripPlanResponse } from "../types/api";
 import { useWorkspace } from "../context/WorkspaceContext";
@@ -69,6 +70,29 @@ export function TripPlannerPage() {
           <div className="eyebrow">YOUR NEXT JOURNEY, SIMPLIFIED</div>
           <h1>Good plans. Better miles.</h1>
           <p>Plan your route, stay ahead of your hours, and keep moving.</p>
+          <HelpTooltip
+            label="How this planner works"
+            controlLabel="How this planner works"
+          >
+            <strong>How this planner works</strong>
+            <ol>
+              <li>Select the current, pickup, and drop-off locations.</li>
+              <li>Enter the driver’s current 70-hour cycle usage.</li>
+              <li>The backend calculates the real road route.</li>
+              <li>
+                HOS logic inserts required pickup, drop-off, fuel, break, and
+                rest events.
+              </li>
+              <li>
+                The same timeline drives the map, compliance summary, and daily
+                logs.
+              </li>
+            </ol>
+            <p>
+              This application is a trip-planning demo and does not replace a
+              certified ELD.
+            </p>
+          </HelpTooltip>
         </div>
         <span className="rules-pill">
           <ShieldCheck size={15} />

@@ -1,3 +1,5 @@
+import { HelpTooltip } from "../ui/HelpTooltip";
+import { helpCopy } from "../ui/helpCopy";
 import {
   ShieldCheck,
   Check,
@@ -7,11 +9,19 @@ import {
 } from "lucide-react";
 import { ProgressBar } from "../ui/ProgressBar";
 import type { Compliance, ScheduleSummary } from "../../types/schedule";
+const ruleHelp: Record<string, string> = {
+  "11_hour_driving_limit": helpCopy.driving,
+  "14_hour_driving_window": helpCopy.window,
+  "30_minute_break": helpCopy.break,
+  "70_hour_cycle": helpCopy.cycleLimit,
+  "34_hour_restart": helpCopy.restart,
+};
 const labels: Record<string, string> = {
   "11_hour_driving_limit": "11-hour driving limit",
   "14_hour_driving_window": "14-hour driving window",
   "30_minute_break": "Driving between qualifying breaks",
   "70_hour_cycle": "70-hour cycle",
+  "34_hour_restart": "34-hour restart",
 };
 export function ComplianceSummary({
   compliance,
@@ -26,6 +36,9 @@ export function ComplianceSummary({
         <div className="heading-inline">
           <ShieldCheck size={19} />
           <h2>HOS compliance</h2>
+          <HelpTooltip label="HOS Compliance">
+            {helpCopy.compliance}
+          </HelpTooltip>
         </div>
         <span
           className={`status-badge ${compliance.compliant ? "" : "warning"}`}
@@ -41,6 +54,11 @@ export function ComplianceSummary({
           <div className="compliance-rule" key={check.rule}>
             <div>
               <strong>{labels[check.rule] || check.rule}</strong>
+              {ruleHelp[check.rule] && (
+                <HelpTooltip label={labels[check.rule] || check.rule}>
+                  {ruleHelp[check.rule]}
+                </HelpTooltip>
+              )}
               {check.status === "compliant" ? (
                 <Check size={14} />
               ) : (
@@ -74,6 +92,7 @@ export function ComplianceSummary({
           <div className="compliance-rule">
             <div>
               <strong>Fuel interval</strong>
+              <HelpTooltip label="Fuel stops">{helpCopy.fuel}</HelpTooltip>
               {compliance.fuel.compliant ? (
                 <Check size={14} />
               ) : (
@@ -91,7 +110,8 @@ export function ComplianceSummary({
         )}
         <div className="compliance-foot">
           {schedule.daily_rests} daily rests · {schedule.cycle_restarts} cycle
-          restarts
+          restarts{" "}
+          <HelpTooltip label="34-Hour Restart">{helpCopy.restart}</HelpTooltip>
           <ArrowUpRight size={14} />
         </div>
         {compliance.warnings.map((warning) => (
